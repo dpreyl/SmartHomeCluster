@@ -1,5 +1,5 @@
-ARG BUILD_PLATFORM=amd64
-FROM ${BUILD_PLATFORM}/ubuntu
+ARG TARGETPLATFORM=amd64
+FROM ${TARGETPLATFORM}/ubuntu
 
 RUN apt-get update
 RUN apt-get -y install curl nfs-client iproute2 bind9-utils telnet \
