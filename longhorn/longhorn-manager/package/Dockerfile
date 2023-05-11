@@ -1,8 +1,10 @@
-FROM registry.suse.com/bci/bci-base:15.4
+ARG BUILD_PLATFORM=amd64
+FROM ${BUILD_PLATFORM}/ubuntu
 
-RUN zypper -n install curl nfs-client iproute2 bind-utils iputils telnet \
-              zip unzip e2fsprogs e2fsprogs-devel xfsprogs xfsprogs-devel cifs-utils && \
-    rm -rf /var/cache/zypp/*
+RUN apt-get update
+RUN apt-get -y install curl nfs-client iproute2 bind9-utils telnet \
+              zip unzip e2fsprogs xfsprogs cifs-utils iputils-arping iputils-clockdiff iputils-ping iputils-tracepath && \
+    rm -rf /var/cache/apt/*
 
 COPY bin package/launch-manager package/nsmounter /usr/local/sbin/
 
